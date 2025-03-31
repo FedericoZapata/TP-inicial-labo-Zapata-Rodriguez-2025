@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
+#from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 # Paso 1: Leer el archivo CSV
@@ -27,13 +28,15 @@ y = df['Apto']
 # Paso 4: Dividir los datos en conjunto de entrenamiento y conjunto de prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)  # 30% para prueba
 
-print(df.head())
 # Paso 5: Crear y entrenar el modelo
 modelo = DecisionTreeClassifier(random_state=42)
+#modelo = LogisticRegression( random_state=42)
 modelo.fit(X_train, y_train)
+print(f"Entrenando modelo con los datos ingresados")
 
 # Paso 6: Hacer predicciones
 y_pred = modelo.predict(X_test)
+print(f"Testeando modelo")
 
 # Paso 7: Evaluar el modelo
 precision = accuracy_score(y_test, y_pred)
@@ -48,5 +51,17 @@ nuevo_candidato = pd.DataFrame({
     'Habilidad_JavaScript': [0],   # Candidato sin habilidad en Javascript
     'Habilidad_Python': [1]  # Candidato con habilidad en Python
    })  # Este es un ejemplo de características del nuevo candidato
+
 prediccion = modelo.predict(nuevo_candidato)
-print(f'El candidato es: {prediccion[0]}')
+habilidades = ""
+if nuevo_candidato['Habilidad_C++'] [0] == 1:
+    habilidades = "C++"
+if nuevo_candidato['Habilidad_Java'] [0] == 1:
+    habilidades = "Java"
+if nuevo_candidato['Habilidad_JavaScript'] [0] == 1:
+    habilidades = "JavaScript"
+if nuevo_candidato['Habilidad_Python'] [0] == 1:
+    habilidades = "Python"
+    
+    
+print(f'El candidato  con {nuevo_candidato['Años de Experiencia'] [0]} años de experiencia y habilidad en {habilidades} es: {prediccion[0]}')
