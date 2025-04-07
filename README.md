@@ -4,7 +4,7 @@
 
 ### Instrucciones
 
-#### Requisitos
+#### Requisitos 📚
 
 - Python 3.x
 - Librerias necesarias: 
