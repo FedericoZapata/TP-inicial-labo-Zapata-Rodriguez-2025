@@ -40,17 +40,46 @@ El codigo toma los datos del archivo **Datos.csv** y hace lo siguiente:
 
 #### Como hacer Predicciones?
 
-Para hacer una predicción, se crea un nuevo DataFrame con los mismos campos que el resto del dataset: años de experiencia, nivel educativo (ya transformado en número), y las habilidades en formato binario (1 si tiene la habilidad, 0 si no).
-Como por ejemplo:
-
+Para hacer una predicción, se crea un nuevo DataFrame solicitandole los datos del candidato al usuario
 ```python
-nuevo_candidato = pd.DataFrame({
-    'Años de Experiencia': [5],
-    'Nivel Educativo': [le_educativo.transform(['Licenciatura'])[0]],
-    'Habilidad_C++': [0],
-    'Habilidad_Java': [0],
-    'Habilidad_JavaScript': [0],
-    'Habilidad_Python': [1]
+#años de experiencia
+while True:
+    try:
+        años_experiencia = int(input("Ingrese los años de experiencia del candidato: "))
+        if años_experiencia < 0:
+            print("Por favor ingrese un número valido para los años de experiencia.")
+        else:
+            break
+    except ValueError:
+        print("Por favor ingresa un numero válido para los años de experiencia.")
+
+#nivel educativo
+nivel_educativo = ""
+while nivel_educativo not in ['1', '2', '3']:
+    print("Selecciona el nivel educativo del candidato:")
+    print("1. Licenciatura")
+    print("2. Máster")
+    print("3. Doctorado")
+    nivel_educativo = input("Ingresa la opcion correspondiente al nivel educativo (1-3): ")
+    if nivel_educativo not in ['1', '2', '3']:
+        print("Por favor ingresa un número válido entre 1 y 3.")
+
+# habilidades, solo se permite seleccionar una
+habilidad_seleccionada = 0
+while habilidad_seleccionada not in [1, 2, 3, 4]:
+    print("Selecciona la habilidad que tiene el candidato:")
+    print("1. C++")
+    print("2. Java")
+    print("3. JavaScript")
+    print("4. Python")
+    try:
+        habilidad_seleccionada = int(input("Ingresa el número de la habilidad (1-4): "))
+        if habilidad_seleccionada not in [1, 2, 3, 4]:
+            print("Selección no válida, por favor elige una opción entre 1 y 4.")
+    except ValueError:
+        print("Por favor ingresa un número válido entre 1 y 4.")
+
+
 })
 ```
 
@@ -135,26 +164,89 @@ print(f'presicion del modelo: {precision * 100:.2f}%')
 Finalmente podemos utilizar el modelo para predecir si un candidato es apto. 
 
 ```python
-#Paso 8: Ejemplo de prediccion para un nuevo candidato
-nuevo_candidato = pd.DataFrame((
-    'Años de Experiencia': [5],
-    'Nivel Educativo': [le_educativo.transform(['Licenciatura'])[0]], #convertir el nivel educativo
-    'Habilidad_C++': [0], #Candidato sin habilidad en C++
-    'Habilidad_Java': [0], #Candidato sin habilidad en Java
-    'Habilidad_JavaScript':[0], #Candidato sin habilidad en JS
-    'Habilidad_Python': [1], #Candidato con habilidad en Pyhton
-)) #Este es un ejemplo de caracteristicas de nuevo candidato
+# Paso 8: solicita datos por consola del candidato a testear
+#años de experiencia
+while True:
+    try:
+        años_experiencia = int(input("Ingrese los años de experiencia del candidato: "))
+        if años_experiencia < 0:
+            print("Por favor ingrese un número valido para los años de experiencia.")
+        else:
+            break
+    except ValueError:
+        print("Por favor ingresa un numero válido para los años de experiencia.")
 
-prediccion = modelo.predict(nuevo_candidato)
+#nivel educativo
+nivel_educativo = ""
+while nivel_educativo not in ['1', '2', '3']:
+    print("Selecciona el nivel educativo del candidato:")
+    print("1. Licenciatura")
+    print("2. Máster")
+    print("3. Doctorado")
+    nivel_educativo = input("Ingresa la opcion correspondiente al nivel educativo (1-3): ")
+    if nivel_educativo not in ['1', '2', '3']:
+        print("Por favor ingresa un número válido entre 1 y 3.")
+
+# conversion del nivel educativo para que lo comprenda el sistema
+nivel_educativo = int(nivel_educativo)
+nivel_educativo_transformado = le_educativo.transform(['Licenciatura' if nivel_educativo == 1 else 'Máster' if nivel_educativo == 2 else 'Doctorado'])[0]
+
+# habilidades, solo se permite seleccionar una
+habilidad_seleccionada = 0
+while habilidad_seleccionada not in [1, 2, 3, 4]:
+    print("Selecciona la habilidad que tiene el candidato:")
+    print("1. C++")
+    print("2. Java")
+    print("3. JavaScript")
+    print("4. Python")
+    try:
+        habilidad_seleccionada = int(input("Ingresa el número de la habilidad (1-4): "))
+        if habilidad_seleccionada not in [1, 2, 3, 4]:
+            print("Selección no válida, por favor elige una opción entre 1 y 4.")
+    except ValueError:
+        print("Por favor ingresa un número válido entre 1 y 4.")
+
+#conversion de las habilidades para que las comprenda el sistema
+
 habilidades = ""
-if nuevo_candidato['Habilidad_C++'] [0] == 1
+if habilidad_seleccionada == 1:
+    habilidad_cpp = 1
+    habilidad_java = 0
+    habilidad_javascript = 0
+    habilidad_python = 0
     habilidades = "C++"
-if nuevo_candidato['Habilidad_Java'] [0] == 1
+elif habilidad_seleccionada == 2:
+    habilidad_cpp = 0
+    habilidad_java = 1
+    habilidad_javascript = 0
+    habilidad_python = 0
     habilidades = "Java"
-if nuevo_candidato['Habilidad_JavaScript'] [0] == 1
+elif habilidad_seleccionada == 3:
+    habilidad_cpp = 0
+    habilidad_java = 0
+    habilidad_javascript = 1
+    habilidad_python = 0
     habilidades = "JavaScript"
-if nuevo_candidato['Habilidad_Python'] [0] == 1
+elif habilidad_seleccionada == 4:
+    habilidad_cpp = 0
+    habilidad_java = 0
+    habilidad_javascript = 0
+    habilidad_python = 1
     habilidades = "Python"
 
-print(f'El candidato con {nuevo_candidato['Años de experiencia'][0]} años de experiencia y habilidad en {habilidades} es : {prediccion[0]}')
+# Crear el DataFrame con los datos ingresados
+nuevo_candidato = pd.DataFrame({
+    'Años de Experiencia': [años_experiencia],
+    'Nivel Educativo': [nivel_educativo_transformado], 
+    'Habilidad_C++': [habilidad_cpp],
+    'Habilidad_Java': [habilidad_java],
+    'Habilidad_JavaScript': [habilidad_javascript],
+    'Habilidad_Python': [habilidad_python]
+})
+
+prediccion = modelo.predict(nuevo_candidato)
+
+print(f'El candidato con {nuevo_candidato["Años de Experiencia"] [0]} años de experiencia y habilidad en {habilidades} es: {prediccion[0]}')
+
+
 ```
