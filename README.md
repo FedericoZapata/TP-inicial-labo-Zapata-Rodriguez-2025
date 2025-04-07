@@ -251,5 +251,8 @@ print(f'El candidato con {nuevo_candidato["Años de Experiencia"] [0]} años de 
 ```
 
 ### Capturas
+![imagen 3](https://github.com/user-attachments/assets/947e8d50-49d4-4136-842b-a7d93947ad4a)
+![imagen 2](https://github.com/user-attachments/assets/7da3433e-ea3d-4c70-af24-1912142b824f)
+![imagen 1](https://github.com/user-attachments/assets/4116eff7-150c-4e00-a4b4-592c16c1d7bc)
 
 
