@@ -1,6 +1,5 @@
 # TP-inicial-labo-Zapata-Rodriguez-2025
 
-## Primera entrega
 
 ### Instrucciones
 
@@ -250,3 +249,7 @@ print(f'El candidato con {nuevo_candidato["Años de Experiencia"] [0]} años de 
 
 
 ```
+
+### Capturas
+
+
