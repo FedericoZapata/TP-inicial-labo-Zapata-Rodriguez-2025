@@ -1,5 +1,64 @@
 # TP-inicial-labo-Zapata-Rodriguez-2025
 ## Primera entrega
+
+## Instrucciones
+
+#### Requisitos
+
+- Python 3.x
+- Librerias necesarias: 
+```bash
+pip install pandas sickit-learn
+```
+#### Archivos necesarios
+- **Datos.csv:** archivo con el dataset
+
+#### Como ejecutarlo
+
+1. Abrir una terminal
+2. Asegurarse de tener el archivos **Datos.csv** en la misma carpeta
+3. Ejecutar el script: 
+
+```bash
+python clasificacion.py
+```
+#### Como entrenarlo
+
+El codigo toma los datos del archivo **Datos.csv** y hace lo siguiente:
+
+1. Preprocesamiento: 
+    - Codifica la columna **Nivel Educativo** en valores numericos usando *LabelEncoder*
+    - Convierte las habilidades en variables binarias con *get_dummies*
+
+2. Separacion de datos:
+    - Divide el dataset en 70% para entrenamiento y 30% para prueba, usando *train_test_split*
+3. Entrenamiento:
+    - Se entrena el modelo *DecisionTreeClassifier* con los datos de entrenamiento
+4. Evaluacion
+    - Se compara la predicción con los valores reales y se calcula la precisión.
+
+#### Como hacer Predicciones?
+
+Para hacer una predicción, se crea un nuevo DataFrame con los mismos campos que el resto del dataset: años de experiencia, nivel educativo (ya transformado en número), y las habilidades en formato binario (1 si tiene la habilidad, 0 si no).
+Como por ejemplo:
+
+```python
+nuevo_candidato = pd.DataFrame({
+    'Años de Experiencia': [5],
+    'Nivel Educativo': [le_educativo.transform(['Licenciatura'])[0]],
+    'Habilidad_C++': [0],
+    'Habilidad_Java': [0],
+    'Habilidad_JavaScript': [0],
+    'Habilidad_Python': [1]
+})
+```
+
+Luego se llama al método .predict() del modelo para obtener el resultado:
+
+```python
+modelo.predict(nuevo_candidato)
+```
+
 ### Implementacion
 Para la implementación preliminar del modelo de machine learning comenzamos creando un dataset ficticio en un archivo .csv que tiene  como columnas:
 
