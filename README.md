@@ -59,7 +59,7 @@ Luego se llama al método .predict() del modelo para obtener el resultado:
 modelo.predict(nuevo_candidato)
 ```
 
-### Implementacion
+## Implementacion
 Para la implementación preliminar del modelo de machine learning comenzamos creando un dataset ficticio en un archivo .csv que tiene  como columnas:
 
 - Años de experiencia: un número entero
