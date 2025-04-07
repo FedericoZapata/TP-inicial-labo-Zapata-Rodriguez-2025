@@ -1,7 +1,8 @@
 # TP-inicial-labo-Zapata-Rodriguez-2025
+
 ## Primera entrega
 
-## Instrucciones
+### Instrucciones
 
 #### Requisitos
 
