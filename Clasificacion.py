@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
 #from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 # Paso 1: Leer el archivo CSV
 df = pd.read_csv("Datos.csv")
@@ -41,6 +41,13 @@ print(f"Testeando modelo")
 # Paso 7: Evaluar el modelo
 precision = accuracy_score(y_test, y_pred)
 print(f'Precisión del modelo: {precision * 100:.2f}%')
+print(df['Apto'].value_counts())
+
+print("Matriz de confusión:")#muestra la cantidad de de falsos positivos y falsos negativos
+print(confusion_matrix(y_test, y_pred))
+
+print("\nReporte de clasificación:")#muestra la precision y sensibilidad
+print(classification_report(y_test, y_pred))
 
 # Paso 8: solicita datos por consola del candidato a testear
 #años de experiencia
@@ -58,16 +65,16 @@ while True:
 nivel_educativo = ""
 while nivel_educativo not in ['1', '2', '3']:
     print("Selecciona el nivel educativo del candidato:")
-    print("1. Licenciatura")
-    print("2. Máster")
-    print("3. Doctorado")
+    print("1. Autodidacta")
+    print("2. Tecnicatura")
+    print("3. Licenciatura")
     nivel_educativo = input("Ingresa la opcion correspondiente al nivel educativo (1-3): ")
     if nivel_educativo not in ['1', '2', '3']:
         print("Por favor ingresa un número válido entre 1 y 3.")
 
 # conversion del nivel educativo para que lo comprenda el sistema
 nivel_educativo = int(nivel_educativo)
-nivel_educativo_transformado = le_educativo.transform(['Licenciatura' if nivel_educativo == 1 else 'Máster' if nivel_educativo == 2 else 'Doctorado'])[0]
+nivel_educativo_transformado = le_educativo.transform(['autodidacta' if nivel_educativo == 1 else 'tecnicatura' if nivel_educativo == 2 else 'licenciatura'])[0]
 
 # habilidades, solo se permite seleccionar una
 habilidad_seleccionada = 0
