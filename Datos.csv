@@ -1,106 +1,100 @@
 Años de Experiencia,Nivel Educativo,Habilidades,Apto
-5,Licenciatura,Python,Apto
-3,Máster,Java,No Apto
-8,Doctorado,JavaScript,Apto
-2,Licenciatura,C++,No Apto
-10,Máster,Python,Apto
-7,Doctorado,JavaScript,Apto
-1,Licenciatura,Java,No Apto
-4,Doctorado,C++,Apto
-6,Máster,Python,No Apto
-9,Licenciatura,Java,Apto
-11,Licenciatura,JavaScript,Apto
-3,Doctorado,C++,No Apto
-12,Máster,Python,Apto
-5,Licenciatura,Java,No Apto
-7,Doctorado,JavaScript,No Apto
-4,Máster,C++,Apto
-6,Licenciatura,Python,No Apto
-2,Doctorado,Java,Apto
-8,Máster,JavaScript,No Apto
-9,Licenciatura,C++,Apto
-10,Licenciatura,Python,No Apto
-5,Máster,Java,Apto
-11,Doctorado,JavaScript,No Apto
-3,Licenciatura,C++,Apto
-4,Máster,Python,No Apto
-6,Licenciatura,Java,Apto
-7,Máster,JavaScript,No Apto
-5,Doctorado,Python,Apto
-10,Máster,C++,Apto
-8,Licenciatura,JavaScript,No Apto
-9,Doctorado,Java,Apto
-4,Licenciatura,Python,No Apto
-7,Licenciatura,C++,Apto
-6,Doctorado,Java,No Apto
-12,Licenciatura,JavaScript,Apto
-5,Doctorado,Python,No Apto
-3,Máster,C++,Apto
-9,Máster,Java,No Apto
-6,Licenciatura,Python,Apto
-10,Doctorado,JavaScript,No Apto
-8,Máster,C++,Apto
-3,Licenciatura,Java,Apto
-7,Doctorado,Python,No Apto
-4,Máster,JavaScript,Apto
-11,Licenciatura,C++,No Apto
-6,Máster,Python,Apto
-5,Doctorado,JavaScript,No Apto
-3,Licenciatura,Java,Apto
-9,Máster,Python,No Apto
-8,Doctorado,C++,Apto
-5,Licenciatura,JavaScript,No Apto
-4,Licenciatura,Python,Apto
-6,Máster,Java,No Apto
-7,Doctorado,JavaScript,Apto
-3,Licenciatura,C++,No Apto
-9,Máster,Python,Apto
-5,Doctorado,JavaScript,Apto
-8,Licenciatura,Java,Apto
-2,Doctorado,C++,No Apto
-10,Máster,JavaScript,Apto
-6,Licenciatura,C++,No Apto
-7,Doctorado,Python,Apto
-4,Máster,Java,Apto
-3,Licenciatura,JavaScript,No Apto
-8,Doctorado,Python,Apto
-9,Licenciatura,Java,Apto
-12,Máster,Java,No Apto
-10,Doctorado,Java,Apto
-5,Licenciatura,JavaScript,Apto
-6,Licenciatura,Java,Apto
-4,Máster,Python,Apto
-11,Doctorado,JavaScript,No Apto
-7,Licenciatura,C++,Apto
-9,Máster,Python,Apto
-3,Doctorado,Java,Apto
-8,Licenciatura,JavaScript,Apto
-5,Máster,Java,Apto
-12,Licenciatura,Java,Apto
-4,Máster,C++,No Apto
-7,Doctorado,Java,Apto
-6,Licenciatura,Python,Apto
-10,Máster,JavaScript,No Apto
-3,Licenciatura,C++,Apto
-5,Doctorado,Python,Apto
-9,Licenciatura,JavaScript,Apto
-8,Máster,C++,No Apto
-11,Doctorado,Python,Apto
-6,Licenciatura,JavaScript,Apto
-4,Máster,Java,No Apto
-10,Doctorado,C++,Apto
-3,Licenciatura,Java,Apto
-5,Máster,Python,Apto
-12,Doctorado,Java,Apto
-8,Licenciatura,C++,No Apto
-6,Licenciatura,Java,Apto
-7,Máster,JavaScript,Apto
-4,Licenciatura,C++,No Apto
-5,Doctorado,Java,Apto
-6,Licenciatura,Python,Apto
-3,Doctorado,JavaScript,Apto
-9,Licenciatura,Python,Apto
-7,Máster,Java,Apto
-5,Doctorado,C++,No Apto
-
+13,tecnicatura,Java,apto
+0,tecnicatura,Python,no apto
+4,tecnicatura,Java,apto
+8,licenciatura,JavaScript,apto
+10,licenciatura,Python,apto
+5,tecnicatura,Python,apto
+15,licenciatura,Java,apto
+9,tecnicatura,Python,apto
+0,tecnicatura,Java,no apto
+13,licenciatura,Python,apto
+9,tecnicatura,JavaScript,apto
+2,licenciatura,Java,no apto
+5,licenciatura,Java,apto
+13,licenciatura,JavaScript,apto
+4,tecnicatura,Python,apto
+9,licenciatura,C++,apto
+12,tecnicatura,Java,apto
+3,tecnicatura,Java,apto
+6,autodidacta,Java,no apto
+8,tecnicatura,C++,apto
+9,licenciatura,Java,apto
+5,licenciatura,C++,apto
+10,autodidacta,Python,apto
+12,autodidacta,Python,apto
+9,autodidacta,Java,no apto
+5,licenciatura,C++,apto
+7,autodidacta,JavaScript,no apto
+4,autodidacta,Python,apto
+13,autodidacta,C++,no apto
+15,licenciatura,Java,apto
+7,tecnicatura,C++,apto
+6,licenciatura,Python,apto
+13,autodidacta,Java,no apto
+5,tecnicatura,JavaScript,apto
+12,autodidacta,JavaScript,no apto
+12,autodidacta,Python,apto
+4,tecnicatura,C++,apto
+3,tecnicatura,JavaScript,apto
+9,tecnicatura,Python,apto
+0,autodidacta,Java,no apto
+6,autodidacta,C++,no apto
+7,autodidacta,Python,apto
+2,autodidacta,C++,no apto
+8,tecnicatura,Python,apto
+3,autodidacta,Python,apto
+11,licenciatura,Python,apto
+2,licenciatura,C++,no apto
+0,autodidacta,Python,no apto
+14,autodidacta,JavaScript,no apto
+3,licenciatura,C++,apto
+6,tecnicatura,C++,apto
+0,autodidacta,Java,no apto
+14,autodidacta,Python,apto
+3,autodidacta,C++,no apto
+11,tecnicatura,Java,apto
+1,tecnicatura,C++,no apto
+5,licenciatura,JavaScript,apto
+4,licenciatura,Java,apto
+12,licenciatura,C++,apto
+6,licenciatura,C++,apto
+8,tecnicatura,Python,apto
+10,tecnicatura,JavaScript,apto
+6,autodidacta,C++,no apto
+5,tecnicatura,Java,apto
+4,autodidacta,Java,no apto
+15,licenciatura,C++,apto
+3,autodidacta,Python,apto
+2,autodidacta,Python,apto
+14,tecnicatura,JavaScript,apto
+2,autodidacta,C++,no apto
+10,autodidacta,Java,no apto
+13,tecnicatura,Java,apto
+0,autodidacta,C++,no apto
+10,licenciatura,Python,apto
+2,tecnicatura,Java,no apto
+13,licenciatura,Java,apto
+4,autodidacta,C++,no apto
+11,licenciatura,C++,apto
+6,autodidacta,Java,no apto
+7,tecnicatura,JavaScript,apto
+5,autodidacta,Python,apto
+1,autodidacta,Python,no apto
+9,licenciatura,Java,apto
+7,autodidacta,C++,no apto
+4,licenciatura,Python,apto
+3,tecnicatura,Python,apto
+11,autodidacta,JavaScript,no apto
+9,licenciatura,Java,apto
+1,tecnicatura,Java,no apto
+13,licenciatura,Java,apto
+0,autodidacta,JavaScript,no apto
+6,tecnicatura,Python,apto
+3,licenciatura,Python,apto
+5,tecnicatura,Python,apto
+0,autodidacta,JavaScript,no apto
+1,autodidacta,Java,no apto
+12,licenciatura,Java,apto
+4,autodidacta,Java,no apto
 
