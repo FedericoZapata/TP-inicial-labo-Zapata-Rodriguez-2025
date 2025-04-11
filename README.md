@@ -250,6 +250,47 @@ print(f'El candidato con {nuevo_candidato["Años de Experiencia"] [0]} años de 
 
 ```
 
+### Resultados del modelo
+
+**Precisión del modelo:** 93.33%
+
+**Distribucion de clases:**
+
+| Clase     | Cantidad |
+|-----------|----------|
+| Apto      | 64       |
+| No apto   | 34       |
+
+**Matriz de confusion**
+
+|                      | Predicho Apto | Predicho No Apto |
+|----------------------|---------------|------------------|
+| **Realmente Apto**   | 16 (✔️)        | 0 (❌)            |
+| **Realmente No Apto**| 2 (❌)         | 12 (✔️)           |
+
+- **Verdaderos positivos (TP):** 16 → Aptos bien clasificados
+- **Falsos positivos (FP):** 2 → No aptos mal clasificados como aptos
+- **Verdaderos negativos (TN):** 12 → No aptos correctamente detectados
+- **Falsos negativos (FN):** 0 → Aptos mal clasificados como no aptos
+
+**Reporte de clasificacion**
+
+| Clase     | Precisión | Recall | F1-score | Soporte |
+|-----------|-----------|--------|----------|---------|
+| Apto      | 0.89      | 1.00   | 0.94     | 16      |
+| No Apto   | 1.00      | 0.86   | 0.92     | 14      |
+
+- **Accuracy (precisión total):** 93%
+- **Macro promedio:** Precision = 0.94, Recall = 0.93, F1 = 0.93
+- **Promedio ponderado:** Precision = 0.94, Recall = 0.93, F1 = 0.93
+
+**Interpretacion**
+- El modelo **identifica correctamente a todos los candidatos aptos** (recall 1.00 para clase “apto”).
+- Tiene una **alta precisión al descartar candidatos no aptos** (precision 1.00 para clase “no apto”).
+- Comete pocos errores al clasificar personas no aptas como aptas (2 casos).
+
+
+
 ### Capturas
 ![imagen 3](https://github.com/user-attachments/assets/947e8d50-49d4-4136-842b-a7d93947ad4a)
 ![imagen 2](https://github.com/user-attachments/assets/7da3433e-ea3d-4c70-af24-1912142b824f)
