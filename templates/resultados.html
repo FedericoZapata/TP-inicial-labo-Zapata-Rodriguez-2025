@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+</head>
+<body>
+    <h1>Resultados de Clasificación</h1>
+
+    <!-- Mostrar precisión del modelo -->
+    {% if precision is not none %}
+    <h2>Precisión del modelo: {{ precision }}%</h2>
+    {% endif %}
+
+    <!-- Tabla de resultados -->
+    <table border="1">
+        <thead>
+            <tr>
+                {% for col in columnas %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in datos %}
+            <tr>
+                {% for valor in fila.values() %}
+                <td>{{ valor }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/">Volver</a>
+</body>
+</html>

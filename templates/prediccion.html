@@ -38,5 +38,9 @@
         {% endfor %}
     </ul>
     {% endif %}
+
+    {% if precision is not none %}
+    <h3>Precisión del modelo: {{ precision }}%</h3>
+    {% endif %}
 </body>
 </html>
