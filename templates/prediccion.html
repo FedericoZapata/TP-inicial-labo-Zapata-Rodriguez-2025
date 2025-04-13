@@ -3,44 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicción</title>
+    <title>Predicción desde CSV</title>
 </head>
 <body>
-    <h1>Predicción para un nuevo candidato</h1>
-    <form action="/predecir" method="POST">
-        <label for="años_experiencia">Años de experiencia:</label>
-        <input type="number" name="años_experiencia" id="años_experiencia" required>
-        <br>
-        <label for="nivel_educativo">Nivel educativo:</label>
-        <select name="nivel_educativo" id="nivel_educativo" required>
-            <option value="autodidacta">Autodidacta</option>
-            <option value="tecnicatura">Tecnicatura</option>
-            <option value="licenciatura">Licenciatura</option>
-        </select>
-        <br>
-        <label for="habilidad">Habilidad:</label>
-        <select name="habilidad" id="habilidad" required>
-            <option value="C++">C++</option>
-            <option value="Java">Java</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="Python">Python</option>
-        </select>
-        <br>
+    <h1>Predicción para candidatos</h1>
+    <form action="/predecir" method="POST" enctype="multipart/form-data">
+        <label for="archivo">Subir archivo CSV:</label>
+        <input type="file" name="archivo" id="archivo" required>
         <button type="submit">Predecir</button>
     </form>
 
-    {% if prediccion is not none and candidato is not none %}
-    <h2>Resultado: {{ prediccion }}</h2>
-    <p>Datos del candidato:</p>
-    <ul>
-        {% for key, value in candidato.items() %}
-        <li>{{ key }}: {{ value }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+    {% if datos is not none and columnas is not none %}
+    <h2>Resultados</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                {% for col in columnas %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in datos %}
+            <tr>
+                {% for valor in fila.values() %}
+                <td>{{ valor }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     {% if precision is not none %}
     <h3>Precisión del modelo: {{ precision }}%</h3>
+    {% endif %}
     {% endif %}
 </body>
 </html>

@@ -84,36 +84,47 @@ def resultados():
 def predecir():
     global modelo, le_educativo, precision_modelo
     if request.method == "POST":
-        # Obtener datos del formulario
-        años_experiencia = int(request.form["años_experiencia"])
-        nivel_educativo = request.form["nivel_educativo"]
-        habilidad = request.form["habilidad"]
+        # Subir archivo CSV con candidatos para predicción
+        archivo = request.files.get("archivo")  # Obtener el archivo del formulario
+        if archivo:
+            # Leer el archivo CSV
+            df_candidatos = pd.read_csv(archivo)
+            # Preprocesar los datos del archivo
+           # Verificar si hay valores desconocidos en 'Nivel Educativo'
+            valores_desconocidos = set(df_candidatos['Nivel Educativo'].str.lower()) - set(le_educativo.classes_)
+            if valores_desconocidos:
+                return f"Error: Los siguientes valores en 'Nivel Educativo' no son reconocidos: {valores_desconocidos}"
 
-        # Convertir datos al formato del modelo
-        nivel_educativo_transformado = le_educativo.transform([nivel_educativo])[0]
-        habilidades = {"Habilidad_C++": 0, "Habilidad_Java": 0, "Habilidad_JavaScript": 0, "Habilidad_Python": 0}
-        habilidades[f"Habilidad_{habilidad}"] = 1
+            # Preprocesar los datos del archivo
+            df_candidatos['Nivel Educativo'] = df_candidatos['Nivel Educativo'].str.lower()  # Convertir a minúsculas
+            df_candidatos['Nivel Educativo'] = le_educativo.transform(df_candidatos['Nivel Educativo'])
+            df_candidatos = pd.concat([df_candidatos, pd.get_dummies(df_candidatos['Habilidades'], prefix='Habilidad')], axis=1)
+            df_candidatos.drop('Habilidades', axis=1, inplace=True)
 
-        # Crear DataFrame para predicción
-        nuevo_candidato = pd.DataFrame({
-            "Años de Experiencia": [años_experiencia],
-            "Nivel Educativo": [nivel_educativo_transformado],
-            **habilidades
-        })
+            # Asegurarse de que las columnas coincidan con las del modelo
+            columnas_modelo = modelo.feature_names_in_
+            for col in columnas_modelo:
+                if col not in df_candidatos:
+                    df_candidatos[col] = 0  # Agregar columnas faltantes con valor 0
 
-        # Realizar predicción
-        prediccion = modelo.predict(nuevo_candidato)[0]
+            # Realizar predicciones
+            X_candidatos = df_candidatos[columnas_modelo]
+            df_candidatos['Predicción'] = modelo.predict(X_candidatos)
 
-        # Renderizar la plantilla con los resultados y la precisión del modelo
-        return render_template(
-            "prediccion.html",
-            prediccion=prediccion,
-            candidato=nuevo_candidato.to_dict(orient="records")[0],
-            precision=precision_modelo  # Enviar precisión solo después de predecir
-        )
+            # Convertir los resultados a un formato para la tabla
+            datos = df_candidatos.to_dict(orient="records")
+            columnas = df_candidatos.columns
+
+            # Renderizar la plantilla con los resultados y la precisión del modelo
+            return render_template(
+                "prediccion.html",
+                datos=datos,
+                columnas=columnas,
+                precision=precision_modelo
+            )
     
-    # Si es un GET, renderizar la página sin datos y sin precisión
-    return render_template("prediccion.html", prediccion=None, candidato=None, precision=None)
+    # Si es un GET, renderizar la página sin datos
+    return render_template("prediccion.html", datos=None, columnas=None, precision=None)
 
 # Inicializar el modelo al iniciar la aplicación
 inicializar_modelo()

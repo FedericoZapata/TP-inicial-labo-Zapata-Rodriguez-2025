@@ -3,28 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados</title>
+    <title>Cargar Archivo</title>
 </head>
 <body>
-    <h1>Resultados de Clasificación</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                {% for col in columnas %}
-                <th>{{ col }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for fila in datos %}
-            <tr>
-                {% for valor in fila.values() %}
-                <td>{{ valor }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="/predecir">Predecir un nuevo candidato</a>
+    <h1>Cargar Archivo CSV</h1>
+    <form action="/predecir" method="POST" enctype="multipart/form-data">
+        <label for="archivo">Selecciona un archivo CSV:</label>
+        <input type="file" name="archivo" id="archivo" required>
+        <button type="submit">Predecir</button>
+    </form>
 </body>
 </html>
