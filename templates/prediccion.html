@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicción desde CSV</title>
+    <title>Resultados de Predicción</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-    <h1>Predicción para candidatos</h1>
-    <form action="/predecir" method="POST" enctype="multipart/form-data">
-        <label for="archivo">Subir archivo CSV:</label>
-        <input type="file" name="archivo" id="archivo" required>
-        <button type="submit">Predecir</button>
-    </form>
-
-    {% if datos is not none and columnas is not none %}
-    <h2>Resultados</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                {% for col in columnas %}
-                <th>{{ col }}</th>
+    <header>
+        <h1>Resultados de Predicción</h1>
+    </header>
+    <div class="container">
+        <h2>Resultados</h2>
+        {% if datos is not none and columnas is not none %}
+        <table>
+            <thead>
+                <tr>
+                    {% for col in columnas %}
+                    <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in datos %}
+                <tr>
+                    {% for valor in fila.values() %}
+                    <td>{{ valor }}</td>
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for fila in datos %}
-            <tr>
-                {% for valor in fila.values() %}
-                <td>{{ valor }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        {% endif %}
 
-    {% if precision is not none %}
-    <h3>Precisión del modelo: {{ precision }}%</h3>
-    {% endif %}
-    {% endif %}
+        {% if precision is not none %}
+        <h3>Precisión del modelo: {{ precision }}%</h3>
+        {% endif %}
+        <a href="/" style="display: inline-block; margin-top: 20px; text-decoration: none; color: #4CAF50;">Volver</a>
+    </div>
 </body>
 </html>

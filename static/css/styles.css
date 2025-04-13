@@ -1,0 +1,56 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+/* Contenedor principal */
+/* Contenedor principal */
+.container {
+    max-width: 90%; /* Permite que el contenedor sea más ancho en pantallas grandes */
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Permite desplazamiento horizontal si el contenido es más ancho */
+}
+
+/* Tabla */
+table {
+    width: 100%; /* La tabla ocupará todo el ancho del contenedor */
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: auto; /* Ajusta automáticamente el ancho de las columnas */
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
