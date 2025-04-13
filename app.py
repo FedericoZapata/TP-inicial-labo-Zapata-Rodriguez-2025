@@ -74,7 +74,9 @@ def predecir():
         # Realizar predicción
         prediccion = modelo.predict(nuevo_candidato)[0]
         return render_template("prediccion.html", prediccion=prediccion, candidato=nuevo_candidato.to_dict(orient="records")[0])
-    return render_template("prediccion.html")
+    
+    # Si es un GET, renderizar la página sin datos
+    return render_template("prediccion.html", prediccion=None, candidato=None)
 
 if __name__ == "__main__":
     app.run(debug=True)

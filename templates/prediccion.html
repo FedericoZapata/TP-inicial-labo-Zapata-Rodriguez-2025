@@ -29,7 +29,7 @@
         <button type="submit">Predecir</button>
     </form>
 
-    {% if prediccion is not none %}
+    {% if prediccion is not none and candidato is not none %}
     <h2>Resultado: {{ prediccion }}</h2>
     <p>Datos del candidato:</p>
     <ul>
