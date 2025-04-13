@@ -109,11 +109,11 @@ def predecir():
             "prediccion.html",
             prediccion=prediccion,
             candidato=nuevo_candidato.to_dict(orient="records")[0],
-            precision=precision_modelo
+            precision=precision_modelo  # Enviar precisión solo después de predecir
         )
     
-    # Si es un GET, renderizar la página sin datos
-    return render_template("prediccion.html", prediccion=None, candidato=None, precision=precision_modelo)
+    # Si es un GET, renderizar la página sin datos y sin precisión
+    return render_template("prediccion.html", prediccion=None, candidato=None, precision=None)
 
 # Inicializar el modelo al iniciar la aplicación
 inicializar_modelo()
