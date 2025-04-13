@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados de Predicción</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script>
+        // Función para filtrar filas de la tabla
+        function filtrarCandidatos(tipo) {
+            const filas = document.querySelectorAll("tbody tr");
+            filas.forEach(fila => {
+                const prediccion = fila.querySelector(".prediccion").textContent.trim();
+                if (tipo === "todos" || prediccion.toLowerCase() === tipo) {
+                    fila.style.display = ""; // Mostrar fila
+                } else {
+                    fila.style.display = "none"; // Ocultar fila
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -12,6 +26,14 @@
     </header>
     <div class="container">
         <h2>Resultados</h2>
+
+        <!-- Filtros -->
+        <div>
+            <button onclick="filtrarCandidatos('todos')">Mostrar Todos</button>
+            <button onclick="filtrarCandidatos('apto')">Mostrar Aptos</button>
+            <button onclick="filtrarCandidatos('no apto')">Mostrar No Aptos</button>
+        </div>
+
         {% if datos is not none and columnas is not none %}
         <table>
             <thead>
@@ -24,8 +46,12 @@
             <tbody>
                 {% for fila in datos %}
                 <tr>
-                    {% for valor in fila.values() %}
+                    {% for key, valor in fila.items() %}
+                    {% if key == "Predicción" %}
+                    <td class="prediccion {% if valor == 'apto' %}apto{% else %}no-apto{% endif %}">{{ valor }}</td>
+                    {% else %}
                     <td>{{ valor }}</td>
+                    {% endif %}
                     {% endfor %}
                 </tr>
                 {% endfor %}

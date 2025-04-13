@@ -54,3 +54,31 @@ table tr:nth-child(even) {
 table tr:hover {
     background-color: #f1f1f1;
 }
+
+/* Estilos para "Apto" y "No Apto" */
+td.apto {
+    background-color: #d4edda; /* Verde claro */
+    color: #155724; /* Verde oscuro */
+    font-weight: bold;
+}
+
+td.no-apto {
+    background-color: #f8d7da; /* Rojo claro */
+    color: #721c24; /* Rojo oscuro */
+    font-weight: bold;
+}
+
+/* Botones de filtro */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
