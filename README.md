@@ -9,77 +9,61 @@
 - Librerias necesarias: 
 ```bash
 pip install pandas sickit-learn
+pip install flask
 ```
+
+En este caso utilizamos flask para la interfaz visual de nuestra aplicacion.
+
 #### Archivos necesarios
 - **Datos.csv:** archivo con el dataset
+- **Candidatos.csv** archivo con el que cargamos los candidatos a evaluar
 
 #### Como ejecutarlo
 
 1. Abrir una terminal
 2. Asegurarse de tener el archivos **Datos.csv** en la misma carpeta
-3. Ejecutar el script: 
+3. Asegurarse de tener los datos necesarios para cargar en la pagina, en este caso **Candidatos.csv**
+4. Ejecutar el script: 
 
 ```bash
-python clasificacion.py
+flask run
 ```
-#### Como entrenarlo
+### Cómo funciona el modelo
 
-El codigo toma los datos del archivo **Datos.csv** y hace lo siguiente:
+1. **Entrenamiento:**
+   - El modelo se entrena utilizando los datos del archivo `Datos.csv`.
+   - Se realiza un preprocesamiento para convertir las columnas en un formato que el modelo pueda interpretar:
+     - `Nivel Educativo` se codifica como valores numéricos usando `LabelEncoder`.
+     - `Habilidades` se convierten en variables binarias usando `get_dummies`.
 
-1. Preprocesamiento: 
-    - Codifica la columna **Nivel Educativo** en valores numericos usando *LabelEncoder*
-    - Convierte las habilidades en variables binarias con *get_dummies*
+2. **Predicción:**
+   - El modelo utiliza un árbol de decisión (`DecisionTreeClassifier`) para clasificar a los candidatos como `Apto` o `No Apto`.
+   - La predicción se basa en las características del candidato, como `Años de Experiencia`, `Nivel Educativo` y `Habilidades`.
 
-2. Separacion de datos:
-    - Divide el dataset en 70% para entrenamiento y 30% para prueba, usando *train_test_split*
-3. Entrenamiento:
-    - Se entrena el modelo *DecisionTreeClassifier* con los datos de entrenamiento
-4. Evaluacion
-    - Se compara la predicción con los valores reales y se calcula la precisión.
+3. **Visualización:**
+   - Los resultados se muestran en una tabla con los datos originales y la predicción.
+   - Los valores se convierten a un formato legible:
+     - `Nivel Educativo`: Se muestra como `autodidacta`, `tecnicatura` o `licenciatura`.
+     - `Habilidades`: Se muestran como `Sí` o `No`.
 
-#### Como hacer Predicciones?
+---
 
-Para hacer una predicción, se crea un nuevo DataFrame solicitandole los datos del candidato al usuario
-```python
-#años de experiencia
-while True:
-    try:
-        años_experiencia = int(input("Ingrese los años de experiencia del candidato: "))
-        if años_experiencia < 0:
-            print("Por favor ingrese un número valido para los años de experiencia.")
-        else:
-            break
-    except ValueError:
-        print("Por favor ingresa un numero válido para los años de experiencia.")
+### Cómo hacer predicciones
 
-#nivel educativo
-nivel_educativo = ""
-while nivel_educativo not in ['1', '2', '3']:
-    print("Selecciona el nivel educativo del candidato:")
-    print("1. Licenciatura")
-    print("2. Máster")
-    print("3. Doctorado")
-    nivel_educativo = input("Ingresa la opcion correspondiente al nivel educativo (1-3): ")
-    if nivel_educativo not in ['1', '2', '3']:
-        print("Por favor ingresa un número válido entre 1 y 3.")
+#### 1. Preparar el archivo CSV
+El archivo debe contener las siguientes columnas:
+- **Años de Experiencia:** Número entero que indica los años de experiencia del candidato.
+- **Nivel Educativo:** Texto que puede ser `autodidacta`, `tecnicatura` o `licenciatura`.
+- **Habilidades:** Texto que indica una habilidad específica, como `Python`, `Java`, `C++` o `JavaScript`.
 
-# habilidades, solo se permite seleccionar una
-habilidad_seleccionada = 0
-while habilidad_seleccionada not in [1, 2, 3, 4]:
-    print("Selecciona la habilidad que tiene el candidato:")
-    print("1. C++")
-    print("2. Java")
-    print("3. JavaScript")
-    print("4. Python")
-    try:
-        habilidad_seleccionada = int(input("Ingresa el número de la habilidad (1-4): "))
-        if habilidad_seleccionada not in [1, 2, 3, 4]:
-            print("Selección no válida, por favor elige una opción entre 1 y 4.")
-    except ValueError:
-        print("Por favor ingresa un número válido entre 1 y 4.")
-
-
-})
+Ejemplo de archivo `Candidatos.csv`:
+```csv
+Años de Experiencia,Nivel Educativo,Habilidades
+5,Licenciatura,Python
+3,Tecnicatura,Java
+7,Autodidacta,C++
+10,Licenciatura,JavaScript
+2,Tecnicatura,Python
 ```
 
 Luego se llama al método .predict() del modelo para obtener el resultado:
@@ -87,6 +71,61 @@ Luego se llama al método .predict() del modelo para obtener el resultado:
 ```python
 modelo.predict(nuevo_candidato)
 ```
+
+#### 2. Subir el archivo CSV
+- Accede a la página principal de la aplicación.
+- Usa el formulario para seleccionar y cargar el archivo `Candidatos.csv`.
+
+#### 3. Procesamiento y predicción
+- La aplicación procesará automáticamente los datos del archivo:
+  - Convertirá el nivel educativo (`autodidacta`, `tecnicatura`, `licenciatura`) en un formato que el modelo pueda interpretar.
+  - Transformará las habilidades en variables binarias (`Sí` o `No`).
+- El modelo realizará las predicciones para cada candidato.
+
+#### 4. Visualización de resultados
+- Los resultados se mostrarán en una tabla en la página de resultados.
+- La tabla incluirá:
+  - Los datos originales del candidato.
+  - La predicción (`Apto` o `No Apto`).
+- Además, se resaltarán los candidatos aptos en verde y los no aptos en rojo para facilitar la visualización.
+
+---
+
+### Resultados del modelo
+
+**Precisión del modelo:** 93.33%
+
+**Distribución de clases:**
+
+| Clase     | Cantidad |
+|-----------|----------|
+| Apto      | 64       |
+| No apto   | 34       |
+
+**Matriz de confusión:**
+
+|                      | Predicho Apto | Predicho No Apto |
+|----------------------|---------------|------------------|
+| **Realmente Apto**   | 16 (✔️)        | 0 (❌)            |
+| **Realmente No Apto**| 2 (❌)         | 12 (✔️)           |
+
+- **Verdaderos positivos (TP):** 16 → Aptos bien clasificados.
+- **Falsos positivos (FP):** 2 → No aptos mal clasificados como aptos.
+- **Verdaderos negativos (TN):** 12 → No aptos correctamente detectados.
+- **Falsos negativos (FN):** 0 → Aptos mal clasificados como no aptos.
+
+**Reporte de clasificación:**
+
+| Clase     | Precisión | Recall | F1-score | Soporte |
+|-----------|-----------|--------|----------|---------|
+| Apto      | 0.89      | 1.00   | 0.94     | 16      |
+| No Apto   | 1.00      | 0.86   | 0.92     | 14      |
+
+- **Accuracy (precisión total):** 93%
+- **Macro promedio:** Precisión = 0.94, Recall = 0.93, F1 = 0.93.
+- **Promedio ponderado:** Precisión = 0.94, Recall = 0.93, F1 = 0.93.
+
+---
 
 ## Implementacion
 Para la implementación preliminar del modelo de machine learning comenzamos creando un dataset ficticio en un archivo .csv que tiene  como columnas:
@@ -107,6 +146,7 @@ Para la implementación preliminar del modelo de machine learning comenzamos cre
 A continuación creamos un archivo .py para comenzar a implementar el modelo. Primero importamos las bibliotecas que vamos a utilizar: 
 
 ```python
+from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
