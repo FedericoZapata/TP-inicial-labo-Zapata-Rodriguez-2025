@@ -89,11 +89,6 @@ def predecir():
         if archivo:
             # Leer el archivo CSV
             df_candidatos = pd.read_csv(archivo)
-            # Preprocesar los datos del archivo
-           # Verificar si hay valores desconocidos en 'Nivel Educativo'
-            valores_desconocidos = set(df_candidatos['Nivel Educativo'].str.lower()) - set(le_educativo.classes_)
-            if valores_desconocidos:
-                return f"Error: Los siguientes valores en 'Nivel Educativo' no son reconocidos: {valores_desconocidos}"
 
             # Preprocesar los datos del archivo
             df_candidatos['Nivel Educativo'] = df_candidatos['Nivel Educativo'].str.lower()  # Convertir a minúsculas
@@ -111,6 +106,14 @@ def predecir():
             X_candidatos = df_candidatos[columnas_modelo]
             df_candidatos['Predicción'] = modelo.predict(X_candidatos)
 
+            # Convertir los valores de 'Nivel Educativo' a texto
+            df_candidatos['Nivel Educativo'] = le_educativo.inverse_transform(df_candidatos['Nivel Educativo'])
+
+            # Convertir valores booleanos o binarios a texto (ejemplo: experiencia)
+            for col in df_candidatos.columns:
+                if col.startswith("Habilidad_"):  # Convertir habilidades a "Sí" o "No"
+                    df_candidatos[col] = df_candidatos[col].apply(lambda x: "Sí" if x == 1 else "No")
+
             # Convertir los resultados a un formato para la tabla
             datos = df_candidatos.to_dict(orient="records")
             columnas = df_candidatos.columns
@@ -125,7 +128,6 @@ def predecir():
     
     # Si es un GET, renderizar la página sin datos
     return render_template("prediccion.html", datos=None, columnas=None, precision=None)
-
 # Inicializar el modelo al iniciar la aplicación
 inicializar_modelo()
 
